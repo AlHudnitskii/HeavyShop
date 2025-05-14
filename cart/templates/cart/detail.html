@@ -4,22 +4,20 @@
 {% block title %}Cart{% endblock title %}
 
 {% block content %}
-    <section class="cart d-flex">
-        <div class="cart-title">
+    <section class="cart custom-flex"> <div class="cart-title">
             <h2>Shopping Cart</h2>
         </div>
         <div class="cart-cards">
             {% for item in cart %}
                 {% with product=item.product %}
-                    <div class="cart-card d-flex">
-                        <div class="cart-card-img">
-                            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/noimage.jpg' %}{% endif %}" alt="">
+                    <div class="cart-card custom-flex"> <div class="cart-card-img">
+                            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/noimage.jpg' %}{% endif %}" alt=""  width="100" height="100">
                         </div>
                         <div class="cart-card-info">
                             <div class="cart-card-name">
                                 <p>{{ product.name }}</p>
                             </div>
-                             <div class="cart-card-q">
+                           <div class="cart-card-q">
                                 <form action="{% url "cart:cart_update" product.id %}" method="post">
                                     {% csrf_token %}
                                     {{ item.update_quantity_form }}
@@ -33,13 +31,11 @@
                         </form>
                         <div class="cart-card-price">
                             {% if product.discount %}
-                                <div class="cart-discount d-flex gap-2">
-                                    <p class="line">$ {{ product.price }}</p>
+                                <div class="cart-discount custom-flex custom-gap-2"> <p class="line">$ {{ product.price }}</p>
                                     <p>$ {{ product.sell_price }}</p>
                                 </div>
                             {% else %}
-                                <p class="price mt-3">$ {{ product.price }}</p>
-                            {% endif %}
+                                <p class="price custom-mt-3">$ {{ product.price }}</p> {% endif %}
                         </div>
                     </div>
                 {% endwith %}
@@ -48,8 +44,7 @@
         <div class="total">
             <h5>Total sum: $ {{ cart.get_total_price }}</h5>
         </div>
-        <div class="cart-buttons d-flex gap-3">
-            <a href="/shop" class="cart-btn">Continue Shopping</a>
+        <div class="cart-buttons custom-flex custom-gap-3"> <a href="/shop" class="cart-btn">Continue Shopping</a>
             {% with cart_quantity=cart|length %}
                 {% if cart_quantity > 0 %}
                     <a href="{% url "orders:order_create" %}" class="cart-btn">Checkout</a>
