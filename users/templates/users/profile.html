@@ -5,17 +5,15 @@
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container">
     <h2 class="mb-3">Your Profile</h2>
     
     <div class="row">
-        <!-- Left Column - Account Details -->
         <div class="col-md-4">
-            <div class="bg-white p-3 mb-3 rounded shadow-sm">
+            <div class="bg-white">
                 <h5 class="mb-2">Account Details</h5>
                 
-                <!-- Avatar Section -->
-                <div class="profile-avatar mb-3">
+                <div class="profile-avatar">
                     {% if user.image %}
                         <img src="{{ user.image.url }}" alt="Avatar" class="img-fluid rounded-circle" width="100" height="100">
                     {% else %}
@@ -64,44 +62,40 @@
                 
                 <hr class="my-3">
                 
-                <!-- Timezone Form -->
                 <h6 class="mb-2">Timezone</h6>
                 <form method="post">
                     {% csrf_token %}
                     {{ timezone_form.as_p }}
-                    <button type="submit" class="btn btn-primary btn-sm w-100" name="timezone_submit">
+                    <button type="submit" class="btn btn-primary" name="timezone_submit">
                         Update Timezone
                     </button>
                 </form>
                 
                 <hr class="my-3">
                 
-                <!-- Logout Button -->
-                <a class="btn btn-secondary btn-sm w-100" href="{% url 'user:logout' %}">
+                <a class="btn btn-secondary" href="{% url 'user:logout' %}">
                     Logout
                 </a>
             </div>
         </div>
         
-        <!-- Right Column - Orders, Notes, Groups -->
         <div class="col-md-8">
-            <!-- Orders Section -->
-            <div class="bg-white p-3 mb-3 rounded shadow-sm">
+            <div class="bg-white">
                 <h5 class="mb-3">Your Orders</h5>
                 
                 {% if orders %}
                     <div class="list-group">
                         {% for order in orders %}
-                            <div class="list-group-item mb-2 rounded">
+                            <div class="list-group-item">
                                 <h6 class="mb-1">
                                     Order № {{ order.id }} 
-                                    <small class="text-muted float-end">
+                                    <small class="text-muted">
                                         Ordered on: {{ order.created|timezone:user.timezone_info.timezone }}
                                     </small>
                                 </h6>
                                 
                                 {% for item in order.items.all %}
-                                    <p class="mb-0 small order-item-details">
+                                    <p class="mb-0">
                                         <span class="product-label">Product:</span> 
                                         {{ item.product.name }} 
                                         (Qty: {{ item.quantity }}, Price: ${{ item.price }})
@@ -115,15 +109,14 @@
                 {% endif %}
             </div>
             
-            <!-- Notes Section -->
-            <div class="bg-white p-3 mb-3 rounded shadow-sm">
+            <div class="bg-white">
                 <h5 class="mb-3">Your Notes</h5>
                 
                 <form method="post" class="mb-3">
                     {% csrf_token %}
                     <h6 class="mb-2">Create New Note</h6>
                     {{ note_form.as_p }}
-                    <button type="submit" class="btn btn-primary btn-sm" name="note_submit">
+                    <button type="submit" class="btn" name="note_submit">
                         Create Note
                     </button>
                 </form>
@@ -131,14 +124,14 @@
                 {% if notes %}
                     <div class="list-group">
                         {% for note in notes %}
-                            <div class="list-group-item mb-2 rounded">
-                                <h6 class="mb-1 fw-bold">
+                            <div class="list-group-item">
+                                <h6 class="mb-1">
                                     {{ note.title }} 
-                                    <small class="text-muted float-end">
+                                    <small class="text-muted">
                                         Updated: {{ note.updated_at|timezone:user.timezone_info.timezone }}
                                     </small>
                                 </h6>
-                                <p class="mb-0 small">{{ note.content }}</p>
+                                <p class="mb-0">{{ note.content }}</p>
                                 <small class="text-muted">
                                     Created: {{ note.created_at|timezone:user.timezone_info.timezone }}
                                 </small>
@@ -150,15 +143,14 @@
                 {% endif %}
             </div>
             
-            <!-- Groups Section -->
-            <div class="bg-white p-3 mb-3 rounded shadow-sm">
+            <div class="bg-white">
                 <h5 class="mb-3">Your Groups</h5>
                 
                 <form method="post" class="mb-3">
                     {% csrf_token %}
                     <h6 class="mb-2">Create New Group</h6>
                     {{ group_form.as_p }}
-                    <button type="submit" class="btn btn-primary btn-sm" name="group_submit">
+                    <button type="submit" class="btn" name="group_submit">
                         Create Group
                     </button>
                 </form>
@@ -166,10 +158,10 @@
                 {% if groups %}
                     <ul class="list-group">
                         {% for group in groups %}
-                            <li class="list-group-item rounded">
-                                <h6 class="mb-1 fw-bold">{{ group.name }}</h6>
+                            <li class="list-group-item">
+                                <h6 class="mb-1">{{ group.name }}</h6>
                                 {% if group.description %}
-                                    <p class="mb-0 small text-muted">{{ group.description }}</p>
+                                    <p class="mb-0">{{ group.description }}</p>
                                 {% endif %}
                             </li>
                         {% endfor %}

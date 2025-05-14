@@ -2,4 +2,5 @@ from .cart import Cart
 
 
 def cart(request):
-    return {'cart': Cart(request)}
+    """Context processor to make the cart available in templates."""
+    return {"cart": Cart(request)}
