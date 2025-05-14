@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %}</title>
-
     <link rel="stylesheet" href="{% static 'css/base.css' %}">  </head>
 <body>
     <header class="header" style="height: 80px; background-color: #fff; box-shadow: var(--box-shadow);">
     <div class="header-container" style="box-sizing: border-box; max-width: 1400px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between;">
-        <navbar class="header-nav" style="/* You might not need any styles here */">
+        <navbar class="header-nav">
             <ul class="header-list" style="display: flex; align-items: center; margin: 0; padding: 0; list-style: none;">
                 <li><a href="/" class="nav-a mx-4" style="text-decoration: none; color: #000; margin-left: 10px; margin-right: 10px;">Home</a></li>
                 <li><a href="/shop" class="nav-a mx-5" style="text-decoration: none; color: #000; margin-left: 10px; margin-right: 10px;">Shop</a></li>
@@ -31,7 +30,7 @@
             {% else %}
                 <a href="{% url "users:login" %}" class="m-2" style="text-decoration: none; color: #000;">LOGIN</a>
             {% endif %} 
-            <p class="cart-quantity" style="/* Your existing styles */">
+            <p class="cart-quantity" style="background-color: #000">
                 {% with cart_quantity=cart|length %}
                     {% if cart_quantity > 0 %}
                         {{ cart_quantity }}
