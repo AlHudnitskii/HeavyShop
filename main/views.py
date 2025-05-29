@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 def popular_list(request):
     """Display a list of popular products."""
 
-    popular_products = Product.objects.filter(available=True)[:5]
+    popular_products = Product.objects.filter(available=True)[:4]
     logger.info(
         f"Displaying popular products: {[product.name for product in popular_products]}"
     )
@@ -165,12 +165,12 @@ def statistics(request):
 
     top_products = Product.objects.annotate(
         total_sold=Sum('order_items__quantity')
-    ).filter(total_sold__gt=0).order_by('-total_sold')[:5]
+    ).filter(total_sold__gt=0).order_by('-total_sold')[:4]
     logger.info(f"Top selling products: {[p.name for p in top_products]}")
 
     profitable_products = Product.objects.annotate(
         revenue=Sum(F('order_items__price') * F('order_items__quantity'))
-    ).filter(revenue__gt=0).order_by('-revenue')[:5]
+    ).filter(revenue__gt=0).order_by('-revenue')[:4]
     logger.info(f"Most profitable products: {[p.name for p in profitable_products]}")
 
     category_stats = Product.objects.values(

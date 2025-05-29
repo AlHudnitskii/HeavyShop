@@ -2,6 +2,7 @@ venv/
 .venv
 .pylintrc
 __pycache__/
+migrations/
 
 .pytest_cache/
 debug.log
